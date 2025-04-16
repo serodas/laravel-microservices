@@ -1,0 +1,38 @@
+services:
+  microservice_ambassador_database:
+    container_name: microservice_ambassador_database
+    image: mariadb:10.7.4
+    ports:
+      - "3360:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    healthcheck:
+      test: ["CMD", "mysqladmin", "--user=root", "--password=", "--host=127.0.0.1", "ping", "--silent"]
+      interval: 2s
+      timeout: 10s
+      retries: 10
+    command: ["--default-authentication-plugin=mysql_native_password"]
+    networks:
+      - ambassador
+
+  microservice_ambassador_php:
+    container_name: microservice_ambassador_php
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app:delegated
+    ports:
+      - "8031:80"
+      - "9031:9001"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    command: php artisan serve --host=0.0.0.0 --port=8031
+    depends_on:
+      - microservice_ambassador_database
+    networks:
+      - ambassador
+
+networks:
+  ambassador:
