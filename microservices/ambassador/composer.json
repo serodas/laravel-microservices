@@ -13,7 +13,8 @@
         "aws/aws-sdk-php": "^3.342",
         "cartalyst/stripe": "^2.4",
         "laravel/framework": "^12.0",
-        "laravel/tinker": "^2.10.1"
+        "laravel/tinker": "^2.10.1",
+        "php-amqplib/php-amqplib": "^2.8"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
