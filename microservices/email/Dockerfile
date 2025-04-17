@@ -11,9 +11,10 @@ RUN docker-php-ext-install -j$(nproc) \
         opcache \
         intl \
         zip \
-        pdo_mysql
+        pdo_mysql \
+        sockets
 
-RUN docker-php-ext-enable amqp apcu opcache
+RUN docker-php-ext-enable amqp apcu opcache sockets
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -29,4 +30,7 @@ COPY etc/php/ /usr/local/etc/php/
 # allow non-root users have home
 RUN mkdir -p /opt/home
 RUN chmod 777 /opt/home
-ENV HOME /opt/home
+ENV HOME=/opt/home
+
+COPY . .
+RUN composer install
