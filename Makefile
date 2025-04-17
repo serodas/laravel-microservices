@@ -6,6 +6,7 @@ COMPOSE := docker compose
 EMAIL_CONTAINER := microservice_email_php
 AMBASSADOR_CONTAINER := microservice_ambassador_php
 DATABASE_CONTAINER := microservice_ambassador_database
+SHARED_RABBITMQ := shared_rabbitmq
 
 # 🐳 Docker Compose
 
@@ -18,11 +19,11 @@ start: docker-compose-all
 
 .PHONY: stop
 stop:
-	docker stop $(EMAIL_CONTAINER) $(AMBASSADOR_CONTAINER) $(DATABASE_CONTAINER)
+	docker stop $(EMAIL_CONTAINER) $(AMBASSADOR_CONTAINER) $(DATABASE_CONTAINER) $(SHARED_RABBITMQ)
 
 .PHONY: destroy
 destroy:
-	docker down $(EMAIL_CONTAINER) $(AMBASSADOR_CONTAINER) $(DATABASE_CONTAINER)
+	docker rm $(EMAIL_CONTAINER) $(AMBASSADOR_CONTAINER) $(DATABASE_CONTAINER) $(SHARED_RABBITMQ)
 
 # Objetivo genérico para docker-compose en subdirectorios
 define docker-compose-command
@@ -37,6 +38,10 @@ doco-email:
 doco-ambassador:
 	$(call docker-compose-command,microservices/ambassador,$(COMPOSE_COMMAND))
 
+.PHONY: doco-shared_rabbitmq
+doco-shared_rabbitmq:
+	$(call docker-compose-command,microservices/rabbitmq,$(COMPOSE_COMMAND))
+
 .PHONY: start-email
 start-email: COMPOSE_COMMAND=up -d
 start-email: doco-email
@@ -46,7 +51,7 @@ start-ambassador: COMPOSE_COMMAND=up -d
 start-ambassador: doco-ambassador
 
 .PHONY: docker-compose-all
-docker-compose-all: doco-email doco-ambassador
+docker-compose-all: doco-email doco-ambassador doco-shared_rabbitmq
 
 .PHONY: deps
 deps: deps-email deps-ambassador
