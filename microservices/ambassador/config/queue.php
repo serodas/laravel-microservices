@@ -89,6 +89,20 @@ return [
             'qos_prefetch_size' => 0,
             'qos_prefetch_count' => 1,
             'qos_global' => false,
+            'queues' => [
+                'emails_topic' => [
+                    'durable' => true,
+                    'exclusive' => false,
+                    'auto_delete' => false,
+                    'routing_key' => 'emails_topic',
+                ],
+                'ambassador_topic' => [
+                    'durable' => true,
+                    'exclusive' => false,
+                    'auto_delete' => false,
+                    'routing_key' => 'ambassador_topic',
+                ],
+            ],
         ],
 
     ],
