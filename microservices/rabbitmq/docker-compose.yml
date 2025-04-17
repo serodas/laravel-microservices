@@ -1,0 +1,15 @@
+services:
+  shared_rabbitmq:
+    container_name: shared_rabbitmq
+    image: 'rabbitmq:3.10.5-management'
+    restart: unless-stopped
+    ports:
+      - "5630:5672"
+      - "8090:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+    networks:
+      - shared_rabbitmq_network
+networks:
+  shared_rabbitmq_network:
