@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('QUEUE_CONNECTION', 'database'),
+    'default' => env('QUEUE_CONNECTION', 'rabbitmq'),
 
     /*
     |--------------------------------------------------------------------------
@@ -70,6 +70,25 @@ return [
             'retry_after' => (int) env('REDIS_QUEUE_RETRY_AFTER', 90),
             'block_for' => null,
             'after_commit' => false,
+        ],
+        'rabbitmq' => [
+            'driver' => 'rabbitmq',
+            'host' => env('RABBITMQ_HOST', 'localhost'),
+            'port' => env('RABBITMQ_PORT', 5672),
+            'user' => env('RABBITMQ_USER', 'guest'),
+            'password' => env('RABBITMQ_PASSWORD', 'guest'),
+            'vhost' => env('RABBITMQ_VHOST', '/'),
+            'exchange' => env('RABBITMQ_EXCHANGE', 'mi_exchange'),
+            'exchange_type' => env('RABBITMQ_EXCHANGE_TYPE', 'direct'),
+            'exchange_passive' => env('RABBITMQ_EXCHANGE_PASSIVE', false),
+            'exchange_durable' => env('RABBITMQ_EXCHANGE_DURABLE', true),
+            'exchange_auto_delete' => env('RABBITMQ_EXCHANGE_AUTO_DELETE', false),
+            'queue' => env('RABBITMQ_QUEUE', 'default'), // Nombre de la cola por defecto
+            'routing_key' => env('RABBITMQ_ROUTING_KEY', ''),
+            'persistent' => true,
+            'qos_prefetch_size' => 0,
+            'qos_prefetch_count' => 1,
+            'qos_global' => false,
         ],
 
     ],
