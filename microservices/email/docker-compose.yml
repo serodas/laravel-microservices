@@ -12,3 +12,12 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     command: php artisan serve --host=0.0.0.0 --port=8030
+    networks:
+      - microservice_email_php
+      - rabbitmq_shared_rabbitmq_network
+
+networks:
+  rabbitmq_shared_rabbitmq_network:
+    name: rabbitmq_shared_rabbitmq_network
+    external: true
+  microservice_email_php:
