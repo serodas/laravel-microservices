@@ -33,6 +33,10 @@ services:
       - microservice_ambassador_database
     networks:
       - ambassador
+      - rabbitmq_shared_rabbitmq_network
 
 networks:
+  rabbitmq_shared_rabbitmq_network:
+    name: rabbitmq_shared_rabbitmq_network
+    external: true
   ambassador:
