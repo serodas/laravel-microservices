@@ -3,6 +3,8 @@ SHELL = /bin/sh
 
 # Variables
 COMPOSE := docker compose
+USER_CONTAINER := microservice_user_php
+DATABASE_USER_CONTAINER := microservice_user_database
 EMAIL_CONTAINER := microservice_email_php
 AMBASSADOR_CONTAINER := microservice_ambassador_php
 DATABASE_CONTAINER := microservice_ambassador_database
@@ -19,11 +21,11 @@ start: docker-compose-all
 
 .PHONY: stop
 stop:
-	docker stop $(EMAIL_CONTAINER) $(AMBASSADOR_CONTAINER) $(DATABASE_CONTAINER) $(SHARED_RABBITMQ)
+	docker stop $(EMAIL_CONTAINER) $(AMBASSADOR_CONTAINER) $(DATABASE_CONTAINER) $(SHARED_RABBITMQ) $(USER_CONTAINER) $(DATABASE_USER_CONTAINER)
 
 .PHONY: destroy
 destroy:
-	docker rm $(EMAIL_CONTAINER) $(AMBASSADOR_CONTAINER) $(DATABASE_CONTAINER) $(SHARED_RABBITMQ)
+	docker rm $(EMAIL_CONTAINER) $(AMBASSADOR_CONTAINER) $(DATABASE_CONTAINER) $(SHARED_RABBITMQ) $(USER_CONTAINER) $(DATABASE_USER_CONTAINER)
 
 # Objetivo genérico para docker-compose en subdirectorios
 define docker-compose-command
@@ -42,6 +44,10 @@ doco-ambassador:
 doco-shared_rabbitmq:
 	$(call docker-compose-command,microservices/rabbitmq,$(COMPOSE_COMMAND))
 
+.PHONY: doco-user
+doco-user:
+	$(call docker-compose-command,microservices/user,$(COMPOSE_COMMAND))
+
 .PHONY: start-email
 start-email: COMPOSE_COMMAND=up -d
 start-email: doco-email
@@ -51,7 +57,7 @@ start-ambassador: COMPOSE_COMMAND=up -d
 start-ambassador: doco-ambassador
 
 .PHONY: docker-compose-all
-docker-compose-all: doco-email doco-ambassador doco-shared_rabbitmq
+docker-compose-all: doco-email doco-ambassador doco-shared_rabbitmq doco-user
 
 .PHONY: deps
 deps: deps-email deps-ambassador
