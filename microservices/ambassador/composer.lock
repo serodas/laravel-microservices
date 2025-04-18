@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "370b744a1a5b947bb364cecad191e821",
+    "content-hash": "195e8671bc91341d54f7719b5e318ce0",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -62,16 +62,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.342.29",
+            "version": "3.342.30",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "33f6d393834053b11a5fc10573a211d92e61c2db"
+                "reference": "eaa4f64784fdf8e66b511df18de43c43fbeb4f63"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/33f6d393834053b11a5fc10573a211d92e61c2db",
-                "reference": "33f6d393834053b11a5fc10573a211d92e61c2db",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/eaa4f64784fdf8e66b511df18de43c43fbeb4f63",
+                "reference": "eaa4f64784fdf8e66b511df18de43c43fbeb4f63",
                 "shasum": ""
             },
             "require": {
@@ -153,9 +153,9 @@
             "support": {
                 "forum": "https://github.com/aws/aws-sdk-php/discussions",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.342.29"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.342.30"
             },
-            "time": "2025-04-17T18:03:54+00:00"
+            "time": "2025-04-18T18:05:51+00:00"
         },
         {
             "name": "brick/math",
@@ -1535,6 +1535,70 @@
                 "source": "https://github.com/laravel/prompts/tree/v0.3.5"
             },
             "time": "2025-02-11T13:34:40+00:00"
+        },
+        {
+            "name": "laravel/sanctum",
+            "version": "v4.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/sanctum.git",
+                "reference": "ec1dd9ddb2ab370f79dfe724a101856e0963f43c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/sanctum/zipball/ec1dd9ddb2ab370f79dfe724a101856e0963f43c",
+                "reference": "ec1dd9ddb2ab370f79dfe724a101856e0963f43c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "illuminate/console": "^11.0|^12.0",
+                "illuminate/contracts": "^11.0|^12.0",
+                "illuminate/database": "^11.0|^12.0",
+                "illuminate/support": "^11.0|^12.0",
+                "php": "^8.2",
+                "symfony/console": "^7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.6",
+                "orchestra/testbench": "^9.0|^10.0",
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^11.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Sanctum\\SanctumServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Sanctum\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Laravel Sanctum provides a featherweight authentication system for SPAs and simple APIs.",
+            "keywords": [
+                "auth",
+                "laravel",
+                "sanctum"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/sanctum/issues",
+                "source": "https://github.com/laravel/sanctum"
+            },
+            "time": "2025-01-26T19:34:36+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -3874,12 +3938,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/serodas/rabbitmq-laravel-connector.git",
-                "reference": "a95531fadbb626a6049ecc3bb12c2b98866435e7"
+                "reference": "e4deec716c2bb74df2577163520494b6611cf41d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/serodas/rabbitmq-laravel-connector/zipball/a95531fadbb626a6049ecc3bb12c2b98866435e7",
-                "reference": "a95531fadbb626a6049ecc3bb12c2b98866435e7",
+                "url": "https://api.github.com/repos/serodas/rabbitmq-laravel-connector/zipball/e4deec716c2bb74df2577163520494b6611cf41d",
+                "reference": "e4deec716c2bb74df2577163520494b6611cf41d",
                 "shasum": ""
             },
             "require": {
@@ -3904,7 +3968,7 @@
                 "source": "https://github.com/serodas/rabbitmq-laravel-connector/tree/main",
                 "issues": "https://github.com/serodas/rabbitmq-laravel-connector/issues"
             },
-            "time": "2025-04-17T20:33:20+00:00"
+            "time": "2025-04-17T22:16:44+00:00"
         },
         {
             "name": "symfony/clock",
