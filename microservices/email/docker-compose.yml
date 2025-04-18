@@ -13,11 +13,11 @@ services:
       - "host.docker.internal:host-gateway"
     command: php artisan serve --host=0.0.0.0
     networks:
-      - microservice_email_php
+      - email
       - rabbitmq_shared_rabbitmq_network
 
 networks:
   rabbitmq_shared_rabbitmq_network:
     name: rabbitmq_shared_rabbitmq_network
     external: true
-  microservice_email_php:
+  email:

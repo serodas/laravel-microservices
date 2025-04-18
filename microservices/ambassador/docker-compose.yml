@@ -34,9 +34,13 @@ services:
     networks:
       - ambassador
       - rabbitmq_shared_rabbitmq_network
+      - user_user_network
 
 networks:
   rabbitmq_shared_rabbitmq_network:
     name: rabbitmq_shared_rabbitmq_network
+    external: true
+  user_user_network:
+    name: user_user_network
     external: true
   ambassador:
