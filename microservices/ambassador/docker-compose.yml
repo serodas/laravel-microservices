@@ -24,11 +24,11 @@ services:
     volumes:
       - .:/app:delegated
     ports:
-      - "8031:80"
+      - "8031:8000"
       - "9031:9001"
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    command: php artisan serve --host=0.0.0.0 --port=8031
+    command: php artisan serve --host=0.0.0.0
     depends_on:
       - microservice_ambassador_database
     networks:

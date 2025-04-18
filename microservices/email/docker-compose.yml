@@ -7,11 +7,11 @@ services:
     volumes:
       - .:/app:delegated
     ports:
-      - "8030:80"
+      - "8030:8000"
       - "9030:9001"
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    command: php artisan serve --host=0.0.0.0 --port=8030
+    command: php artisan serve --host=0.0.0.0
     networks:
       - microservice_email_php
       - rabbitmq_shared_rabbitmq_network

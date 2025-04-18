@@ -21,10 +21,10 @@ services:
     volumes:
       - .:/app:delegated
     ports:
-      - "8032:80"
+      - "8032:8000"
       - "9032:9001"
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    command: php artisan serve --host=0.0.0.0 --port=8032
+    command: php artisan serve --host=0.0.0.0
     depends_on:
       - microservice_user_database
