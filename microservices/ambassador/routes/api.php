@@ -9,4 +9,5 @@ Route::prefix('ambassador')->group(function () {
         ->name('register');
     Route::post('login', [AuthController::class, 'login'])
         ->name('login');
+    Route::get('user', [AuthController::class, 'user']);
 });

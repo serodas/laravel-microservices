@@ -31,4 +31,9 @@ class AuthController extends Controller
             'message' => 'success'
         ])->withCookie($cookie);
     }
+
+    public function user(Request $request)
+    {
+        return $this->userService->get("user");
+    }
 }
