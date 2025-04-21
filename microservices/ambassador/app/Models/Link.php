@@ -22,7 +22,11 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Link whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Link whereUserId($value)
  * @mixin \Eloquent
- * @property-read \App\Models\User $user
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Order[] $orders
+ * @property-read int|null $orders_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
+ * @property-read int|null $products_count
+ * @method static \Database\Factories\LinkFactory factory(...$parameters)
  */
 class Link extends Model
 {
@@ -30,18 +34,8 @@ class Link extends Model
 
     protected $guarded = [];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
     public function products()
     {
         return $this->belongsToMany(Product::class, LinkProduct::class);
-    }
-
-    public function orders()
-    {
-        return $this->hasMany(Order::class, 'code', 'code')->where('complete', 1);
     }
 }
