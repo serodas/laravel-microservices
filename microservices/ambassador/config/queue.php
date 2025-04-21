@@ -102,6 +102,18 @@ return [
                     'auto_delete' => false,
                     'routing_key' => 'ambassador_topic',
                 ],
+                'checkout_topic' => [
+                    'durable' => true,
+                    'exclusive' => false,
+                    'auto_delete' => false,
+                    'routing_key' => 'checkout_topic',
+                ],
+                'admin_topic' => [
+                    'durable' => true,
+                    'exclusive' => false,
+                    'auto_delete' => false,
+                    'routing_key' => 'admin_topic',
+                ],
             ],
         ],
 
