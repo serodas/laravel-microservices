@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LinkController;
+use App\Http\Controllers\StatsController;
 use App\Http\Middleware\ScopeAmbassadorMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -14,5 +16,8 @@ Route::prefix('ambassador')->group(function () {
         Route::post('logout', [AuthController::class, 'logout']);
         Route::put('users/info', [AuthController::class, 'updateInfo']);
         Route::put('users/password', [AuthController::class, 'updatePassword']);
+
+        Route::post('links', [LinkController::class, 'store']);
+        Route::get('stats', [StatsController::class, 'index']);
     });
 });
