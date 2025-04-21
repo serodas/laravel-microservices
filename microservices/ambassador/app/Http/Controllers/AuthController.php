@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\UpdateInfoRequest;
 use App\Http\Requests\UpdatePasswordRequest;
+use App\Models\Order;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -36,7 +37,13 @@ class AuthController extends Controller
 
     public function user(Request $request)
     {
-        return $this->userService->get("user");
+        $user = $this->userService->get('user');
+
+        $orders = Order::where('user_id', $user['id'])->get();
+
+        $user['revenue'] = $orders->sum(fn(Order $order) => $order->total);
+
+        return $user;
     }
 
     public function logout()
