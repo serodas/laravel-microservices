@@ -3,6 +3,8 @@ SHELL = /bin/sh
 
 # Variables
 COMPOSE := docker compose
+CHECKOUT_CONTAINER := microservice_checkout_php
+DATABASE_CHECKOUT_CONTAINER := microservice_checkout_database
 USER_CONTAINER := microservice_user_php
 DATABASE_USER_CONTAINER := microservice_user_database
 EMAIL_CONTAINER := microservice_email_php
@@ -21,16 +23,20 @@ start: docker-compose-all
 
 .PHONY: stop
 stop:
-	docker stop $(EMAIL_CONTAINER) $(AMBASSADOR_CONTAINER) $(DATABASE_CONTAINER) $(SHARED_RABBITMQ) $(USER_CONTAINER) $(DATABASE_USER_CONTAINER)
+	docker stop $(EMAIL_CONTAINER) $(AMBASSADOR_CONTAINER) $(DATABASE_CONTAINER) $(SHARED_RABBITMQ) $(USER_CONTAINER) $(DATABASE_USER_CONTAINER) $(CHECKOUT_CONTAINER) $(DATABASE_CHECKOUT_CONTAINER)
 
 .PHONY: destroy
 destroy:
-	docker rm $(EMAIL_CONTAINER) $(AMBASSADOR_CONTAINER) $(DATABASE_CONTAINER) $(SHARED_RABBITMQ) $(USER_CONTAINER) $(DATABASE_USER_CONTAINER)
+	docker rm $(EMAIL_CONTAINER) $(AMBASSADOR_CONTAINER) $(DATABASE_CONTAINER) $(SHARED_RABBITMQ) $(USER_CONTAINER) $(DATABASE_USER_CONTAINER) $(CHECKOUT_CONTAINER) $(DATABASE_CHECKOUT_CONTAINER)
 
 # Objetivo genérico para docker-compose en subdirectorios
 define docker-compose-command
 	UID=$$(id -u) GID=$$(id -g) cd $(1) && $(COMPOSE) $(2)
 endef
+
+.PHONY: doco-checkout
+doco-checkout:
+	$(call docker-compose-command,microservices/checkout,$(COMPOSE_COMMAND))
 
 .PHONY: doco-email
 doco-email:
@@ -57,7 +63,7 @@ start-ambassador: COMPOSE_COMMAND=up -d
 start-ambassador: doco-ambassador
 
 .PHONY: docker-compose-all
-docker-compose-all: doco-email doco-ambassador doco-shared_rabbitmq doco-user
+docker-compose-all: doco-email doco-ambassador doco-shared_rabbitmq doco-user doco-checkout
 
 .PHONY: deps
 deps: deps-email deps-ambassador
