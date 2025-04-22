@@ -3,6 +3,8 @@ SHELL = /bin/sh
 
 # Variables
 COMPOSE := docker compose
+ADMIN_CONTAINER := microservice_admin_php
+DATABASE_ADMIN_CONTAINER := microservice_admin_database
 CHECKOUT_CONTAINER := microservice_checkout_php
 DATABASE_CHECKOUT_CONTAINER := microservice_checkout_database
 USER_CONTAINER := microservice_user_php
@@ -23,16 +25,20 @@ start: docker-compose-all
 
 .PHONY: stop
 stop:
-	docker stop $(EMAIL_CONTAINER) $(AMBASSADOR_CONTAINER) $(DATABASE_CONTAINER) $(SHARED_RABBITMQ) $(USER_CONTAINER) $(DATABASE_USER_CONTAINER) $(CHECKOUT_CONTAINER) $(DATABASE_CHECKOUT_CONTAINER)
+	docker stop $(EMAIL_CONTAINER) $(AMBASSADOR_CONTAINER) $(DATABASE_CONTAINER) $(SHARED_RABBITMQ) $(USER_CONTAINER) $(DATABASE_USER_CONTAINER) $(CHECKOUT_CONTAINER) $(DATABASE_CHECKOUT_CONTAINER) $(DATABASE_ADMIN_CONTAINER) $(ADMIN_CONTAINER)
 
 .PHONY: destroy
 destroy:
-	docker rm $(EMAIL_CONTAINER) $(AMBASSADOR_CONTAINER) $(DATABASE_CONTAINER) $(SHARED_RABBITMQ) $(USER_CONTAINER) $(DATABASE_USER_CONTAINER) $(CHECKOUT_CONTAINER) $(DATABASE_CHECKOUT_CONTAINER)
+	docker rm $(EMAIL_CONTAINER) $(AMBASSADOR_CONTAINER) $(DATABASE_CONTAINER) $(SHARED_RABBITMQ) $(USER_CONTAINER) $(DATABASE_USER_CONTAINER) $(CHECKOUT_CONTAINER) $(DATABASE_CHECKOUT_CONTAINER) $(DATABASE_ADMIN_CONTAINER) $(ADMIN_CONTAINER)
 
 # Objetivo genérico para docker-compose en subdirectorios
 define docker-compose-command
 	UID=$$(id -u) GID=$$(id -g) cd $(1) && $(COMPOSE) $(2)
 endef
+
+.PHONY: doco-admin
+doco-admin:
+	$(call docker-compose-command,microservices/admin,$(COMPOSE_COMMAND))
 
 .PHONY: doco-checkout
 doco-checkout:
@@ -63,7 +69,7 @@ start-ambassador: COMPOSE_COMMAND=up -d
 start-ambassador: doco-ambassador
 
 .PHONY: docker-compose-all
-docker-compose-all: doco-email doco-ambassador doco-shared_rabbitmq doco-user doco-checkout
+docker-compose-all: doco-email doco-ambassador doco-shared_rabbitmq doco-user doco-checkout doco-admin
 
 .PHONY: deps
 deps: deps-email deps-ambassador
