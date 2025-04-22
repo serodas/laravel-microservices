@@ -19,7 +19,7 @@ class OrderItemFactory extends Factory
     {
         return [
             'id' => $this->faker->unique()->randomNumber(),
-            'order_id' => Order::factory()->create()->id,
+            'order_id' => 1,
             'product_title' => $this->faker->sentence(),
             'price' => $this->faker->randomFloat(2, 1, 100),
             'quantity' => $this->faker->numberBetween(1, 10),

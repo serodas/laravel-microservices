@@ -15,7 +15,7 @@ class LinkProductSeeder extends Seeder
     public function run()
     {
         LinkProduct::factory(
-            count: 10,
+            count: 3,
         )->create();
     }
 }

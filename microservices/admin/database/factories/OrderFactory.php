@@ -29,7 +29,6 @@ class OrderFactory extends Factory
             'city' => $this->faker->city(),
             'country' => $this->faker->country(),
             'zip' => $this->faker->postcode(),
-            'complete' => $this->faker->boolean(),
             'created_at' => $this->faker->dateTime(),
             'updated_at' => $this->faker->dateTime(),
         ];
